@@ -5,6 +5,14 @@
     <title>Registro</title>
     <link rel="stylesheet"
           href="diseno.css" />
+    <link rel='stylesheet'
+          type='text/css'
+          media='only screen and (min-width: 530px) and (min-device-width: 481px)'
+          href='estilos/wide.css' />
+    <link rel='stylesheet'
+          type='text/css'
+          media='only screen and (max-width: 480px)'
+          href='estilos/smartphone.css' />
     <script type="text/javascript" src="funciones.js"></script>
     <script>
         function vervalores(){
@@ -31,6 +39,7 @@
 
 
                 <span class="campos_obligatorios">* Campos obligatorios</span>
+                <ul>
 
             <li>
                 <label for="name">Nombre y apellidos<span>(*)</span>:</label>
@@ -65,9 +74,11 @@
                 <option label="Harware" value="Hardware">
                 <!--</select>-->
            </datalist>
-        </li>
+            </li>
+                    </ul>
             </div>
         <div class="column">
+            <ul>
         <li>
             <label for="interes">Tecnologias o herramientas intresado:</label></br>
             <textarea name="interes" class="form-input" id="interes" placeholder="Escriba si desea obtener informacion sobre algun campo"></textarea>

@@ -1,7 +1,6 @@
 /**
  * Created by egibar on 20/09/2016.
  */
-
 function revisar(elemento) {
     if (elemento.value==""){
         elemento.className='error';

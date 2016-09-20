@@ -7,10 +7,10 @@ body						{font: 16px Georgia, serif;}
 						 margin-bottom: 1px; color: black;}
 
 section > div				{padding: 20px;}
-header, nav, section		{background: #eee; text-align: center;}
-footer					{background: #eee; text-align: center;}
+header, nav, section		{ text-align: center;}
+footer					{ text-align: center;}
 nav span             				{ margin: 0px 10px 0px 0px;
 						width: 100%;
 						display: inline-block;}
 
-#ErrorMsgs          		 { color: #f61; font-size: smaler}
+#ErrorMsgs          		 { color: #f61; font-size: smaller}
