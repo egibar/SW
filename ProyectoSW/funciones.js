@@ -2,14 +2,15 @@
  * Created by egibar on 20/09/2016.
  */
 function revisar(elemento) {
-    if (elemento.value==""){
+    exp =/^[a-zA-Z]+ [a-zA-Z]+ [a-zA-Z]/g;
+
+    if (!exp.test(elemento.value)){
         elemento.className='error';
     }
     else elemento.className='form-input';
 }
 function revisaremail(elemento) {
-    exp = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-
+    exp =/^[a-zA-Z]+\d{3}\@ikasle.ehu\.(eus|es)/g;
     if (!exp.test(elemento.value)) {
         elemento.className='error';
         alert("Error: La dirección de correo " + elemento.value + " es incorrecta.");
@@ -18,7 +19,7 @@ function revisaremail(elemento) {
 }
 function revisarpass(elemento) {
 //    exp = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    if (elemento.value==""){
+    if( !(/^\d{6}$/.test(elemento.value)) ){
         elemento.className='error';
     }
     else elemento.className='form-input';

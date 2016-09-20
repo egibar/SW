@@ -26,6 +26,13 @@
         }
 
     </script>
+    <style>
+        .thumb {
+            height: 200px;
+            border: 1px solid #000;
+            margin: 10px 5px 0 0;
+        }
+    </style>
 
 
 </head>
@@ -83,15 +90,49 @@
             <label for="interes">Tecnologias o herramientas intresado:</label></br>
             <textarea name="interes" class="form-input" id="interes" placeholder="Escriba si desea obtener informacion sobre algun campo"></textarea>
         </li>
-            <input class="subirfoto" type="file" id="foto" name="archivo" /><br />
 
-            <a href="layout.html"><button type="button" name="volver"  class="form-btn" rigth="20%" >Volver</button></a>
-            <button  type="submit" name="boton"  class="form-btn" onsubmit="revisar()" >Enviar</button>
+            <!--<input class="subirfoto" type="file" id="foto" name="archivo" /><br />-->
+                <input type="file" id="files" name="files[]" class="subirfoto"/>
+                <br />
+                <output id="list" class="imagen"></output>
+
+            <a href="layout.html"><button type="button" name="volver"  class="form-btn" id="volver" rigth="20%" >Volver</button></a>
+            <button  type="submit" name="boton" id="enviar"  class="form-btn" onsubmit="revisar()" >Enviar</button>
 
 
             </ul>
 </div>
 </form>
+<script>
+    function archivo(evt) {
+        var files = evt.target.files; // FileList object
 
+        // Obtenemos la imagen del campo "file".
+        for (var i = 0, f; f = files[i]; i++) {
+            //Solo admitimos imágenes.
+            if (!f.type.match('image.*')) {
+                continue;
+            }
+
+            var reader = new FileReader();
+
+            reader.onload = (function(theFile) {
+                return function(e) {
+                    // Insertamos la imagen
+                    var Volver = document.getElementById(volver);
+                    var Enviar = document.getElementById(enviar);
+                    document.getElementById("list").innerHTML = ['<img class="thumb" src="', e.target.result,'" title="', escape(theFile.name), '"/> </br>'].join('');
+                    document.getElementById('list').insertBefore(volver,null);
+                    document.getElementById('list').insertBefore(enviar,null);
+
+                };
+            })(f);
+
+            reader.readAsDataURL(f);
+        }
+    }
+
+    document.getElementById('files').addEventListener('change', archivo, false);
+</script>
 </body>
 </html>
