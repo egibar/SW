@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro</title>
+    <link rel="stylesheet"
+          href="diseno.css" />
+    <script type="text/javascript" src="funciones.js"></script>
+    <script>
+        function vervalores(){
+            var sAux="";
+            var frm = document.getElementById("registro");
+            for (i=0;i<frm.elements.length-2;i++)
+            { sAux += "NOMBRE: " + frm.elements[i].name + " ";
+                sAux += "VALOR: " + frm.elements[i].value + "\n" ;
+            }
+            alert(sAux);
+        }
+
+    </script>
+
+
+</head>
+<body>
+<form id='registro' name='registro' onSubmit='vervalores()'method='post' enctype='multipart/form-data' action="" >
+    <!--<form action='' method='post' enctype='multipart/form-data'>-->
+
+        <h1>REGISTRO</h1>
+
+            <div class="column">
+
+
+                <span class="campos_obligatorios">* Campos obligatorios</span>
+
+            <li>
+                <label for="name">Nombre y apellidos<span>(*)</span>:</label>
+                <input type="text" name="name" id="name" placeholder="Asier Eguibar" class="form-input" onblur="revisar(this)" />
+                <!--<input type="text" name="name" id="name" placeholder="Asier Eguibar" required/> -->
+
+            </li>
+            <li>
+                <label for="email">Direccion de correo<span>(*)</span>:</label>
+                <input type="text" name="email" id="email"placeholder="aeguibar006@ikasle.ehu.eus" class="form-input" onblur="revisaremail(this)" />
+                <!--<input type="email" name="email" id="email"placeholder="aeguibar006@ikasle.ehu.eus" required/>   -->
+
+            </li>
+            <li>
+                <label for="password">Password<span>(*)</span>:</label>
+                <input type="password" name="password" id="password" placeholder="al menos una letra y un numero" class="form-input" onblur="revisarpass(this)"/>
+                <!-- <input type="password" name="password" id="password" required/> -->
+            </li>
+            <li>
+                <label for="telefono">Numero de telefono<span>(*)</span>:</label>
+                <input type="text" name="telefono" id="telefono" maxlength="9" minlength="9" class="form-input" onblur="revisartel(this)"/>
+                <!--<input type="text" name="telefono" id="telefono" maxlength="9" minlength="9" required/>-->
+            </li>
+            <li>
+                <label for="especialidad">Especialidad<span>(*)</span>:</label>
+                <input list="especialidad" name="especialidad" placeholder="doble click para las opciones" class="form-input" onblur="revisaresp(this)"/>
+                <!--<input list="especialidad" name="especialidad" required/>-->
+                <!--<select id="especialidad">-->
+            <datalist id="especialidad">
+                <option label="Ingenieria del software" value="Ingenieria del software">
+                <option label="Computacion" value="Computacion">
+                <option label="Harware" value="Hardware">
+                <!--</select>-->
+           </datalist>
+        </li>
+            </div>
+        <div class="column">
+        <li>
+            <label for="interes">Tecnologias o herramientas intresado:</label></br>
+            <textarea name="interes" class="form-input" id="interes" placeholder="Escriba si desea obtener informacion sobre algun campo"></textarea>
+        </li>
+            <input class="subirfoto" type="file" id="foto" name="archivo" /><br />
+
+            <a href="layout.html"><button type="button" name="volver"  class="form-btn" rigth="20%" >Volver</button></a>
+            <button  type="submit" name="boton"  class="form-btn" onsubmit="revisar()" >Enviar</button>
+
+
+            </ul>
+</div>
+</form>
+
+</body>
+</html>
