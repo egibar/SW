@@ -37,7 +37,7 @@
 
 </head>
 <body>
-<form id='registro' name='registro' onSubmit='vervalores()'method='post' enctype='multipart/form-data' action="" >
+<form id='registro' name='registro' onSubmit='vervalores()' method='post' enctype='multipart/form-data' action="" >
     <!--<form action='' method='post' enctype='multipart/form-data'>-->
 
         <h1>REGISTRO</h1>
@@ -50,7 +50,7 @@
 
             <li>
                 <label for="name">Nombre y apellidos<span>(*)</span>:</label>
-                <input type="text" name="name" id="name" placeholder="Asier Eguibar" class="form-input" onblur="revisar(this)" />
+                <input type="text" name="name" id="name" placeholder="Asier Eguibar Redondo" class="form-input" onblur="revisar(this)" />
                 <!--<input type="text" name="name" id="name" placeholder="Asier Eguibar" required/> -->
 
             </li>
@@ -62,7 +62,7 @@
             </li>
             <li>
                 <label for="password">Password<span>(*)</span>:</label>
-                <input type="password" name="password" id="password" placeholder="al menos una letra y un numero" class="form-input" onblur="revisarpass(this)"/>
+                <input type="password" name="password" id="password" placeholder="6 digitos" class="form-input" onblur="revisarpass(this)"/>
                 <!-- <input type="password" name="password" id="password" required/> -->
             </li>
             <li>
@@ -87,7 +87,7 @@
         <div class="column">
             <ul>
         <li>
-            <label for="interes">Tecnologias o herramientas intresado:</label></br>
+            <label for="interes" id="intereslabel">Tecnologias o herramientas intresado:</label></br>
             <textarea name="interes" class="form-input" id="interes" placeholder="Escriba si desea obtener informacion sobre algun campo"></textarea>
         </li>
 
@@ -103,6 +103,21 @@
             </ul>
 </div>
 </form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("textarea").dblclick(function(){
+            $(this).hide();
+        });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+        $(document.getElementById('intereslabel')).dblclick(function(){
+            $(document.getElementById('interes')).show();
+        });
+    });
+</script>
 <script>
     function archivo(evt) {
         var files = evt.target.files; // FileList object
