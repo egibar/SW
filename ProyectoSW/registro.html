@@ -58,15 +58,21 @@
                 <!--<input type="text" name="telefono" id="telefono" maxlength="9" minlength="9" required/>-->
             </li>
             <li>
-                <label for="especialidad">Especialidad<span>(*)</span>:</label>
-                <input list="especialidad" name="especialidad" placeholder="doble click para las opciones" class="form-input" onblur="revisaresp(this)"/>
+                <label for="especialidad">Especialidad<span>(*)</span>:</label></br>
+                <!--<input list="especialidad" name="especialidad" placeholder="doble click para las opciones" class="form-input" onblur="revisaresp(this)"/>
                 <!--<input list="especialidad" name="especialidad" required/>-->
-                <!--<select id="especialidad">-->
+                <!--<select id="especialidad">
             <datalist id="especialidad">
                 <option label="Ingenieria del software" value="Ingenieria del software">
                 <option label="Computacion" value="Computacion">
                 <option label="Harware" value="Hardware">
                 <!--</select>-->
+                <select name="especialidad" id="especialidad" onchange='revisaresp(this)'>
+                    <option>Ingeniería del Software</option>
+                    <option>Ingeniería de Computadores</option>
+                    <option>Computación</option>
+                    <option>Otra</option>
+                </select>
            </datalist>
             </li>
                     </ul>
@@ -75,7 +81,7 @@
             <ul>
         <li>
             <label for="interes" id="intereslabel">Tecnologias o herramientas intresado:</label></br>
-            <textarea name="interes" class="form-input" id="interes" placeholder="Escriba si desea obtener informacion sobre algun campo"></textarea>
+            <textarea name="interes" class="form-input" id="interes" placeholder= " Escriba si desea obtener informacion sobre algun campo                                   Tap two times for disappearing "></textarea>
         </li>
 
             <!--<input class="subirfoto" type="file" id="foto" name="archivo" /><br />-->
@@ -95,6 +101,7 @@
     $(document).ready(function(){
         $("textarea").dblclick(function(){
             $(this).hide();
+            $(document.getElementById('intereslabel')).innerHTML=['<span> tap 2 times for undo</span>'].join('');
         });
     });
 </script>
