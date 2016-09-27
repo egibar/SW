@@ -14,18 +14,7 @@
           media='only screen and (max-width: 480px)'
           href='estilos/smartphone.css' />
     <script type="text/javascript" src="funciones.js"></script>
-    <script>
-        function vervalores(){
-            var sAux="";
-            var frm = document.getElementById("registro");
-            for (i=0;i<frm.elements.length-2;i++)
-            { sAux += "NOMBRE: " + frm.elements[i].name + " ";
-                sAux += "VALOR: " + frm.elements[i].value + "\n" ;
-            }
-            alert(sAux);
-        }
 
-    </script>
     <style>
         .thumb {
             height: 200px;
@@ -33,11 +22,9 @@
             margin: 10px 5px 0 0;
         }
     </style>
-
-
 </head>
 <body>
-<form id='registro' name='registro' onSubmit='vervalores()' method='post' enctype='multipart/form-data' action="" >
+<form id='registro' name='registro' onSubmit="return vervalores()" method="post" action="" >
     <!--<form action='' method='post' enctype='multipart/form-data'>-->
 
         <h1>REGISTRO</h1>
@@ -50,7 +37,7 @@
 
             <li>
                 <label for="name">Nombre y apellidos<span>(*)</span>:</label>
-                <input type="text" name="name" id="name" placeholder="Asier Eguibar Redondo" class="form-input" onblur="revisar(this)" />
+                <input type="text" name="name" id="name" placeholder="Asier Eguibar Redondo" class="form-input" onblur="revisarname(this)" />
                 <!--<input type="text" name="name" id="name" placeholder="Asier Eguibar" required/> -->
 
             </li>
