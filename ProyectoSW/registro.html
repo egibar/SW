@@ -24,7 +24,7 @@
     </style>
 </head>
 <body>
-<form id='registro' name='registro' onSubmit="return vervalores()" method="post" action="" >
+<form id='registro' name='registro' onSubmit="return vervalores()" method="post" action="Registrar.php" enctype='multipart/form-data'>
     <!--<form action='' method='post' enctype='multipart/form-data'>-->
 
         <h1>REGISTRO</h1>
@@ -73,7 +73,7 @@
                     <option>Computación</option>
                     <option>Otra</option>
                 </select>
-           </datalist>
+         <!--  </datalist> -->
             </li>
                     </ul>
             </div>
@@ -87,7 +87,7 @@
             <!--<input class="subirfoto" type="file" id="foto" name="archivo" /><br />-->
                 <input type="file" id="files" name="files[]" class="subirfoto"/>
                 <br />
-                <output id="list" class="imagen"></output>
+                <output id="list" class="imagen"></output>-->
 
             <a href="layout.html"><button type="button" name="volver"  class="form-btn" id="volver" rigth="20%" >Volver</button></a>
             <button  type="submit" name="boton" id="enviar"  class="form-btn" onsubmit="revisar()" >Enviar</button>
@@ -101,7 +101,7 @@
     $(document).ready(function(){
         $("textarea").dblclick(function(){
             $(this).hide();
-            $(document.getElementById('intereslabel')).innerHTML=['<span> tap 2 times for undo</span>'].join('');
+            $('#intereslabel').innerHTML=['<span> tap 2 times for undo</span>'].join('');
         });
     });
 </script>

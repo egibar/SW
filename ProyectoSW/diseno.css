@@ -4,7 +4,7 @@ body {
     color: black;
 }
 
-.form-input,input,textarea, .error{
+.form-input,input,textarea, .error,select{
     display: block;
     height: 24px;
     padding: 6px 10px;
@@ -20,8 +20,12 @@ input{
     background: #FFF;
     border: 5px solid #dbdbdb;
 }
+select{
+    height: 45px;
+    width: 350px;
+}
 .error{
-    background: #ff9197;
+    /*background: #ff9197;*/
     border: 5px solid red;
 }
 .campos_obligatorios{
