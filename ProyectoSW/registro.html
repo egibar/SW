@@ -24,7 +24,7 @@
     </style>
 </head>
 <body>
-<form id='registro' name='registro' onSubmit="return vervalores()" method="post" action="Registrar.php" enctype='multipart/form-data'>
+<form id='registro' name='registro' onSubmit="return vervalores()" method="post" action="RegistrarconFoto.php" enctype='multipart/form-data'>
     <!--<form action='' method='post' enctype='multipart/form-data'>-->
 
         <h1>REGISTRO</h1>
@@ -84,12 +84,18 @@
             <textarea name="interes" class="form-input" id="interes" placeholder= " Escriba si desea obtener informacion sobre algun campo                                   Tap two times for disappearing "></textarea>
         </li>
 
-            <!--<input class="subirfoto" type="file" id="foto" name="archivo" /><br />-->
-                <input type="file" id="files" name="files[]" class="subirfoto"/>
+               <!-- <input type="file" id="files" name="files[]" class="subirfoto"/>
                 <br />
                 <output id="list" class="imagen"></output>-->
+                <li>
+                    <label for="files" id="imagenlabel">Foto de perfil:</label></br>
+                    <input class="subirfoto" type="File" name="image" id="files" accept="image/*">
+                    <output id="list" class="imagen"></output>
+                    <div class="imagen"></div>
+                </li>
 
-            <a href="layout.html"><button type="button" name="volver"  class="form-btn" id="volver" rigth="20%" >Volver</button></a>
+
+                <a href="layout.html"><button type="button" name="volver"  class="form-btn" id="volver" rigth="20%" >Volver</button></a>
             <button  type="submit" name="boton" id="enviar"  class="form-btn" onsubmit="revisar()" >Enviar</button>
 
 
@@ -103,13 +109,12 @@
             $(this).hide();
             $('#intereslabel').innerHTML=['<span> tap 2 times for undo</span>'].join('');
         });
-    });
-</script>
-<script>
-    $(document).ready(function(){
-        $(document.getElementById('intereslabel')).dblclick(function(){
+
+            $(document.getElementById('intereslabel')).dblclick(function () {
             $(document.getElementById('interes')).show();
         });
+
+
     });
 </script>
 <script>
