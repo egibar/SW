@@ -11,7 +11,7 @@ $db = getBD();
 $usuarios = mysqli_query($db, "SELECT * FROM `usuario`");
 echo '
 		    <table border=1>
-		    <tr>
+		    <tr> 
 		        <th> NOMBRE </th>
 		        <th> EMAIL </th>
 		        <th> PASSWORD </th>
