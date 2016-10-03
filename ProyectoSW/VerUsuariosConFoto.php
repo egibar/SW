@@ -32,11 +32,11 @@ while ($result = mysqli_fetch_array($usuarios)) {
 
     if ($result['image'] == NULL) {
 
-        echo '<td><p align="center"><img heigth="50%" width="50%" src="uknown.png"/></p></td></tr>';
+        echo '<td><p align="center"><img heigth="50%" width="50%" src="imagen/uknown.png"/></p></td></tr>';
 
     } else {
 
-        echo '<td><p align="center"><img heigth="50%" width="50%" src="data:jpeg;base64,' . base64_encode($result['image']) . '"/></p></td></tr>';
+        echo '<td><p align="center"><img heigth="50%" width="50%" src="imagen/data:jpeg;base64,' . base64_encode($result['image']) . '"/></p></td></tr>';
     }
 }
 echo '</table>';
