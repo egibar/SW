@@ -8,7 +8,6 @@
 include "funciones.php";
 $db = getBD();
 
-
 //$db =mysqli_connect("localhost","root","","sw");
 
 if($db->connect_errno){
@@ -23,10 +22,20 @@ $tel=$_POST["telefono"];
 $esp=$_POST["especialidad"];
 $interes=$_POST["interes"];
 
-if($db->connect_errno){
-    echo "Fallo al conectar a MySQL: ".$db->connect_error;
-
+if(!filter_var($name,FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z]+ [a-zA-Z]+( [a-zA-Z])*/")))){
+    die('Error, incorrect name');
 }
+if(!filter_var($email,FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z]+\d{3}\@ikasle.ehu\.(eus|es)/")))){
+    die('Error, incorrect email');
+}
+if(!filter_var($pass,FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,15}/")))){
+    die('Error, incorrect password');
+}
+if(!filter_var($tel,FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^\d{9}$/")))){
+    die('Error, incorrect telefon');
+}
+
+
 $buscarUsuario = "SELECT * FROM usuario WHERE email = '$email'  ";
 if ($result = mysqli_query($db,$buscarUsuario))
 {
@@ -35,6 +44,8 @@ if ($result = mysqli_query($db,$buscarUsuario))
     // Free result set
     mysqli_free_result($result);
 }
+
+$encPass=sha1($pass);
 
 if ($count == 1)
     echo '<script language="javascript">alert("Correo ya existente");</script>';
@@ -51,7 +62,7 @@ else {
         $data = addslashes($data);
         fclose($fp);
 
-        $sql = "INSERT INTO `usuario` (`name`, `email`, `password`, `telefono`, `especialidad`, `interes`, `image`) VALUES ('$name', '$email', '$pass', '$tel', '$esp',' $interes', '$data')";
+        $sql = "INSERT INTO `usuario` (`name`, `email`, `password`, `telefono`, `especialidad`, `interes`, `image`) VALUES ('$name', '$email', '$encPass', '$tel', '$esp',' $interes', '$data')";
 
         if (!$db->query($sql)) {
 
@@ -70,7 +81,7 @@ else {
     } else {
 
 
-    $sql = "INSERT INTO `usuario` (`name`, `email`, `password`, `telefono`, `especialidad`, `interes`) VALUES ('$name', '$email', '$pass', '$tel', '$esp',' $interes')";
+    $sql = "INSERT INTO `usuario` (`name`, `email`, `password`, `telefono`, `especialidad`, `interes`) VALUES ('$name', '$email', '$encPass', '$tel', '$esp',' $interes')";
 
 
     if (!mysqli_query($db, $sql)) {
