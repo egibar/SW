@@ -25,7 +25,7 @@ $interes=$_POST["interes"];
 if(!filter_var($name,FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z]+ [a-zA-Z]+( [a-zA-Z])*/")))){
     die('Error, incorrect name');
 }
-if(!filter_var($email,FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z]+\d{3}\@ikasle.ehu\.(eus|es)/")))){
+if(!filter_var($email,FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z]+\d{3}\@ikasle.ehu\.(eus||es)/")))){
     die('Error, incorrect email');
 }
 if(!filter_var($pass,FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,15}/")))){
