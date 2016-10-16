@@ -24,7 +24,7 @@ function login(){
     $sth= $db->query($sql);
     $cont=$sth->num_rows;
     while( $result=mysqli_fetch_array($sth)) {
-        $password=$result['Password'];
+        $password=$result['password'];
     }
     if ($cont == 1) {
         if (strcmp($password, $pass) == 0) {
