@@ -17,12 +17,26 @@
   <div id='page-wrap'>
 	<header class='main' id='h1'>
 		<span class="right"><a href="registro.html">Registrarse</a></span>
-      		<span class="right"><a href="login.php">Login</a></span>
+
+		<?php
+		@session_start();
+		if(isset($_SESSION['usuario'])){
+		echo("<span class='right'><a href='...'>Logout</a></span>");
+		}else{
+		echo("<span class='right'><a href='login.php'>Login</a></span>");
+		}
+		?>
+<!--      		<span class="right"><a href="login.php">Login</a></span>
       		<span class="right" style="display:none;"><a href="logout">Logout</a></span>
+-->
 		<h2>Quiz: el juego de las preguntas</h2>
     </header>
 	<nav class='main' id='n1' role='navigation'>
-		<span><a href='layout.html'>Inicio</a></span>
+		<span><a href='layout.php'>Inicio</a></span>
+		<?php
+		if(isset($_SESSION['usuario']))
+			echo("<span><a href='insertarPreguntas.php'>Insertar Preguntas</a></span>");
+		?>
 		<span><a href='VisualizarPreguntas.php'>Preguntas</a></span>
 		<span><a href='creditos.html'>Creditos</a></span>
 	</nav>

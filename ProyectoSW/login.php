@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>LOGIN</title>
+    <link rel="stylesheet"
+          href="diseno.css" />
 </head>
 <body>
 <form id='login' method="post" action="login.php">
@@ -21,7 +23,7 @@
                 <label for="password">Password:</label>
                 <input type="password" name="password" id="password" required class="form-input"/>
             </li>
-            <a href="layout.html"><button  type="button" name="volver" id="volver"  class="form-btn" rigth="20%">Volver</button></a>
+            <a href="layout.php"><button type="button" name="volver" id="volver" class="form-btn" rigth="20%">Volver</button></a>
             <button  type="submit" name="boton" id="enviar"  class="form-btn" onsubmit="revisar()" >Enviar</button>
             </ul>
             </div>

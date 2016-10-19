@@ -42,5 +42,5 @@ while ($result = mysqli_fetch_array($usuarios)) {
 echo '</table>';
 $usuarios->close();
 mysqli_close($db);
-
+accion("ver preguntas");
 ?>
