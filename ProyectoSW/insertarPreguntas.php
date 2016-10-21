@@ -25,6 +25,11 @@
 
             </li>
             <li>
+                <label for="subject">Subject:</label>
+                <input type="text" name="subject" id="subject" required class="form-input"/>
+
+            </li>
+            <li>
                 <label for="complejidad">Complejidad:</label>
                 <input type="number" name="complejidad" id="complejidad" required pattern="[1-5]" class="form-input"/>
 
@@ -50,42 +55,9 @@ else {
     $pregunta = $_POST['pregunta'];
     $respuesta = $_POST["respuesta"];
     $complejidad = $_POST["complejidad"];
-    if (isset($pregunta) && isset($respuesta) && isset($complejidad)) {
-
-        $db = getBD();
-
-        if ($db->connect_errno) {
-
-            echo "Fallo al conectar a MySQL: " . $link->connect_error;
-
-        }
-
-       /* if (!filter_var($pregunta, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-zA-Z]+/"))) & (!filter_var($respuesta, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[a-zA-Z]+/")))) &
-            (!filter_var($complejidad, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/^[1-5]/"))))
-        ) {*/
-            $sql = "SELECT * FROM Preguntas";
-            $sth = $db->query($sql);
-            $cont = $sth->num_rows;
-            $contador = $cont + 1;
-            $sql = "INSERT INTO `Preguntas` (`ID`,`Pregunta`, `Respuesta`, `Complejidad`, `Email`) VALUES ('$contador','$_POST[pregunta]', '$_POST[respuesta]', '$_POST[complejidad]', '$mail')";
-
-
-            if (!$db->query($sql)) {
-
-                die('Error: ' . $link->error);
-
-            } else {
-                accion("insertar pregunta");
-                echo "1 Question Added";
-
-            }
-
-        //}
-
-
-   //     $sth->close();
-
-        $db->close();
-    }
+    $subject=$_POST['subject'];
+    if (isset($pregunta) && isset($respuesta) && isset($complejidad) && isset($subject))
+        insertarPregunta();
 }
+
 ?>

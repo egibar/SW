@@ -24,7 +24,7 @@
                 <input type="password" name="password" id="password" required class="form-input"/>
             </li>
             <a href="layout.php"><button type="button" name="volver" id="volver" class="form-btn" rigth="20%">Volver</button></a>
-            <button  type="submit" name="boton" id="enviar"  class="form-btn" onsubmit="revisar()" >Enviar</button>
+            <button  type="submit" name="boton" id="enviar"  class="form-btn" >Enviar</button>
             </ul>
             </div>
             </form>
