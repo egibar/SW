@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Obtener Datos</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="diseno.css">
+    <script type="text/javascript">
+        function completar(){
+            var enc=false;
+            var xmlDoc = document.getElementById('datos').contentDocument;
+            var email = document.getElementById("email").value;
+            var listaemail=xmlDoc.getElementsByTagName('email');
+            var listanombres=xmlDoc.getElementsByTagName('nombre');
+            var listaape1=xmlDoc.getElementsByTagName('apellido1');
+            var listaape2=xmlDoc.getElementsByTagName('apellido2');
+            var listatelefonos=xmlDoc.getElementsByTagName('telefono');
+            for(var i = 0; i < listaemail.length;i++){
+
+                if(email==listaemail[i].childNodes[0].nodeValue){
+                    enc=true;
+                    var name = listanombres[i].childNodes[0].nodeValue;
+                    var apellidos = listaape1[i].childNodes[0].nodeValue+" "+listaape2[i].childNodes[0].nodeValue;
+                    var telefono = listatelefonos[i].childNodes[0].nodeValue;
+
+                    document.getElementById("name").value=name;
+                    document.getElementById("apellidos").value=apellidos;
+                    document.getElementById("telefono").value=telefono;
+
+                    break;
+                }
+
+            }
+
+            if(!enc){
+                alert("Este correo no esta registrado. Ingresa otro");
+                document.getElementById("name").value="";
+                document.getElementById("apellidos").value="";
+                document.getElementById("telefono").value="";
+            }
+        }
+    </script>
+</head>
+<body>
+<OBJECT id="datos" data="usuarios.xml" type="text/xml" style="display:none"> </OBJECT>
+<div class = "center">
+    <form action="" method="post">
+        <div class="column">
+            <h1>Busqueda usuario</h1>
+
+            <ul>
+                <li>
+                    <label for="email">Direccion de correo:</label>
+                    <input type="email" placeholder="Inserte Email" required name="email" id="email" size="21" value="">
+                </li>
+                <li>
+                    <label for="name">Nombre:</label>
+                    <input type="text" id="name" disabled="true" size="21">
+                </li>
+                <li>
+                    <label for="apellidos">Apellidos:</label>
+                    <input type="text" id="apellidos" disabled="true" size="21">
+                </li>
+                <li>
+                    <label for="telefono">Telefono:</label>
+                    <input type="text" id="telefono" disabled="true" size="21">
+                </li>
+                <button id="buscar" type="button" class="form-btn" onclick="javascript:completar()">Buscar</button>
+
+            </ul>
+        </div>
+    </form>
+
+</body>
+</html>

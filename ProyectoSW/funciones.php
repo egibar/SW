@@ -7,8 +7,8 @@
  */
 function getBD(){
 
-    return (mysqli_connect("localhost","root","","quiz"));
-    //return mysqli_connect("mysql.hostinger.es","u566940088_asier","egibar","u566940088_quiz");
+    //return (mysqli_connect("localhost","root","","quiz"));
+    return mysqli_connect("mysql.hostinger.es","u566940088_asier","egibar","u566940088_quiz");
 }
 function GetIP(){
     if(!empty($_SERVER['HTTP_CLIENT_IP']))
@@ -34,18 +34,18 @@ function conexion(){
     $email = $_SESSION['usuario'];
 
     $fecha_login = date('Y-m-d H:i:s');
-    $sql = "SELECT * FROM conexiones";
+    $sql = "SELECT * FROM Conexiones";
     $sth = $db->query($sql);
     $cont = $sth->num_rows;
     $contador = $cont + 1;
 
-    $sql= "INSERT INTO `conexiones` (`ID`,`Email`, `Hora`) VALUES ('$contador','$email','$fecha_login')";
+    $sql= "INSERT INTO `Conexiones` (`ID`,`Email`, `Hora`) VALUES ('$contador','$email','$fecha_login')";
 
     if(!$db->query($sql)){
         die('Error: '.$db->error);
     }
 
-    $sql= "SELECT id FROM conexiones WHERE Email='$email' and Hora='$fecha_login'";
+    $sql= "SELECT id FROM Conexiones WHERE Email='$email' and Hora='$fecha_login'";
 
     if(!$sth=$db->query($sql)){
         die('Error: '.$db->error);
@@ -64,7 +64,7 @@ function accion($tipo){
     $db = getBD();
     $fecha = date('Y-m-d H:i:s');
     $ip=GetIp();
-    $sql = "SELECT * FROM acciones";
+    $sql = "SELECT * FROM Acciones";
     $sth = $db->query($sql);
     $cont = $sth->num_rows;
     $contador = $cont + 1;
@@ -142,11 +142,11 @@ else {
 
         }
 
-        $sql = "SELECT * FROM preguntas";
+        $sql = "SELECT * FROM Preguntas";
         $sth = $db->query($sql);
         $cont = $sth->num_rows;
         $contador = $cont + 1;
-        $sql = "INSERT INTO `preguntas` (`ID`,`Pregunta`, `Respuesta`, `Complejidad`, `Email`) VALUES ('$contador','$_POST[pregunta]', '$_POST[respuesta]', '$_POST[complejidad]', '$mail')";
+        $sql = "INSERT INTO `Preguntas` (`ID`,`Pregunta`, `Respuesta`, `Complejidad`, `Email`) VALUES ('$contador','$_POST[pregunta]', '$_POST[respuesta]', '$_POST[complejidad]', '$mail')";
 
 
         if (!$db->query($sql)) {
