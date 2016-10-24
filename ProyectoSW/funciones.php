@@ -157,7 +157,7 @@ else {
             $pregunta=$xml->addChild("assessmentItem");
         //    $pregunta->addAttribute("ID");
             $pregunta->addAttribute("complexity",$_POST['complejidad']);//probar /n para salto de linea
-            $pregunta->addAttribute("subjet",$_POST['subject']);
+            $pregunta->addAttribute("subject",$_POST['subject']);
             $enun=$pregunta->addChild("itemBody");
             $preg=$enun->addChild("p",$_POST['pregunta']);
             $res=$pregunta->addChild("correctResponse");
@@ -182,8 +182,8 @@ else {
         echo'
         <table border=1>
 		    <tr> 
-		        <th> Complejidad </th>
 		        <th> Pregunta </th>
+		        <th> Complejidad </th>
 		        <th> Tema </th>
 		    </tr>';
 		    foreach ($xml->children() as $pregunta){
