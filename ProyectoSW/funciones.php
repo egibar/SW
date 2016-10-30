@@ -164,9 +164,9 @@ else {
             $resp=$res->addChild("value",$_POST['respuesta']);
 
             if(!$xml->asXML("preguntas.xml"))
-                echo ("<p  COLOR=RED>El usuario no esta logueado</p>");
+                echo ("<p  COLOR=RED>XML guardado correctamente</p>");
             else{
-                echo ("<p  COLOR=RED>El usuario no esta logueado</p>");
+                echo ("<p  COLOR=RED>Error al guardar el XML</p>");
             }
         }
 

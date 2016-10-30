@@ -90,7 +90,7 @@ if (isset($_POST['pregunta']) && isset($_POST['respuesta'])) {
 <button onclick="pedirDatos()">Cargar Preguntas</button>
 <button onclick="enviarDatos()">Insertar Preguntas</button>
 </div>
-<div id="resultado"></div>
-<div id="preguntas"></div>
+<div id="resultado" align="center"></div>
+<div id="preguntas" align="center"></div>
 </body>
 </html>
