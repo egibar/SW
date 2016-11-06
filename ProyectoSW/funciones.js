@@ -31,6 +31,12 @@
          //     alert("Tiene que escribir un teléfono de 9 dígitos");
          return false;
      }
+     if (!cmail){
+         return false;
+     }
+     if (!cpass){
+         return false;
+     }
  }
  function revisaresp(obj){
      if(obj.value=="Otra"){
