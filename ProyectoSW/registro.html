@@ -73,17 +73,17 @@
         function comprobarMail() {
             var m=$('#email').val();
             $('#mail').append('<img id="imm" height="20px" width="20px" src="imagen/loading.gif"/>');
-      $.post('ComprobarEmail.php',{email:m}, function (respuesta) {
+            $.post('ComprobarEmail.php', {email:m}, function (respuesta) {
                 console.log("La respuesta es:", respuesta);
                 if (respuesta=='SI'){
                     $('#imm').remove();
                     $('#mail').append("<img id='imm' with='20px' height='20px' src='imagen/Green_check.png'> </img>");
-                    cmail=false;
+                    cmail=true;
                 }
                 else{
                     $('#imm').remove();
                     $('#mail').append("<img id='imm' with='20px' height='20px'src='imagen/Red_check.png'> </img>");
-                    cmail=true;
+                    cmail=false;
                 }
 
             });
