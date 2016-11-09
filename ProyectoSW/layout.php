@@ -38,7 +38,7 @@
 			echo("<span><a href='insertarPreguntas.php'>Insertar Preguntas</a></span>");
 		?>
 		<span><a href='VisualizarPreguntas.php'>Preguntas</a></span>
-		<span><a href='creditos.html'>Creditos</a></span>
+		<span><a href='creditos.php'>Creditos</a></span>
 	</nav>
     <section class="main" id="s1">
     

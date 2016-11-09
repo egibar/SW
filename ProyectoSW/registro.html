@@ -92,7 +92,8 @@
         function comprobarPass(){
             var p = $("#password").val();
             $("#pass").append("<img id='imp' width='20px' height='20px' src='imagen/loading.gif'> </img>");
-            $.post("ComprobarContrasena.php", {password: p}, function(respuesta) {
+            $.post("ProbarContrasena2.php", {password: p}, function(respuesta
+            ) {
                 console.log("La respuesta es:", respuesta)
                 if(respuesta=="VALIDA"){
                     $("#imp").remove();
