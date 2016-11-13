@@ -4,6 +4,7 @@
      var nombre = document.getElementById('name');
      var email = document.getElementById("email");
      var password = document.getElementById("password");
+     var password2 = document.getElementById("password2");
      var telefono = document.getElementById("telefono");
 
      expname =/^[a-zA-Z]+ [a-zA-Z]+ ([a-zA-Z]*)/g;
@@ -24,6 +25,9 @@
      else if (!exppass.test(password.value)) {
          password.className = 'error';
      //    alert("la contraseña no tiene al menos 6 caracteres");
+         return false;
+     }
+     else if(password!=password2) {
          return false;
      }
     else if( !exptel.test(telefono.value) && telefono.value.length==9 ) {

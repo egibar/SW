@@ -8,8 +8,8 @@
 function getBD()
 {
 
-    //return (mysqli_connect("localhost","root","","quiz"));
-    return mysqli_connect("mysql.hostinger.es", "u566940088_asier", "egibar", "u566940088_quiz");
+    return (mysqli_connect("localhost","root","","quiz"));
+    //return mysqli_connect("mysql.hostinger.es", "u566940088_asier", "egibar", "u566940088_quiz");
 }
 
 function GetIP()
@@ -44,7 +44,7 @@ function conexion()
     $cont = $sth->num_rows;
     $contador = $cont + 1;
 
-    $sql = "INSERT INTO `Conexiones` (`ID`,`Email`, `Hora`) VALUES ('$contador','$email','$fecha_login')";
+    $sql = "INSERT INTO `Conexiones` (`id`,`Email`, `Hora`) VALUES ('$contador','$email','$fecha_login')";
 
     if (!$db->query($sql)) {
         die('Error: ' . $db->error);
@@ -79,9 +79,9 @@ function accion($tipo)
         $mail = $_SESSION['usuario'];
         $identificador = $_SESSION['identificador'];
 
-        $sql = "INSERT INTO `Acciones` (`ID`,`Conexion`, `Email`, `Tipo`, `Hora`, `Ip`) VALUES ('$contador','$identificador','$mail','$tipo', '$fecha', '$ip')";
+        $sql = "INSERT INTO `Acciones` (`id`,`Conexion`, `Email`, `Tipo`, `Hora`, `Ip`) VALUES ('$contador','$identificador','$mail','$tipo', '$fecha', '$ip')";
     } else {
-        $sql = "INSERT INTO `Acciones` (`ID`,`Tipo`, `Hora`, `Ip`) VALUES ('$contador', '$tipo', '$fecha', '$ip')";
+        $sql = "INSERT INTO `Acciones` (`id`,`Tipo`, `Hora`, `Ip`) VALUES ('$contador', '$tipo', '$fecha', '$ip')";
     }
 
 
@@ -109,20 +109,60 @@ function login()
     $sth = $db->query($sql);
     $cont = $sth->num_rows;
     while ($result = mysqli_fetch_array($sth)) {
+        $rol= $result['rol'];
         $password = $result['password'];
+        if($result['Bloqueado']==1){
+            echo ('<p color="red">El usuario esta bloquado</p>');
+            return false;
+        }
     }
     if ($cont == 1) {
         if (strcmp($password, $pass) == 0) {
             $_SESSION['usuario'] = $email;
+            $_SESSION['rol'] = $rol;
             conexion();
             return true;
         } else {
-            echo("<p class='link'><FONT COLOR=RED>El usuario o la contraseña son incorrectas</FONT></p>");
+            if (empty($_SESSION[$email])){
+                $_SESSION[$email]=1;
+                echo ('<p color="red">Password incorrecta</p>');
+            }
+            else{
+                $_SESSION[$email]++;
+                echo ('<p color="red">Password incorrecta</p>');
+                if ($_SESSION[$email]==3){
+                    $_SESSION[$email]==0;
+                    bloquearUsuario($email);
+                }
+
+            }
             return false;
         }
     }
     $sth->close();
     $db->close();
+
+}
+
+function bloquearUsuario($email){
+    $db= getBD();
+    $sql = "UPDATE usuario SET Bloquedo=true WHERE Email=$email";
+    if(!$db->query($sql))
+        die('Error: '.$db->error);
+    else{
+        $row=$db->affected_rows;
+        if($row==1)
+            echo ('<p color="red">El usuario ha sido bloqueado</p>');
+    }
+    $db->close();
+}
+
+function logout(){
+session_start();
+
+$identificador=$_SESSION['identificador'];
+$mail=$_SESSION['usuario'];
+    session_destroy();
 
 }
 
@@ -151,7 +191,7 @@ function insertarPregunta()
         $sth = $db->query($sql);
         $cont = $sth->num_rows;
         $contador = $cont + 1;
-        $sql = "INSERT INTO `Preguntas` (`ID`,`Pregunta`, `Respuesta`, `Complejidad`, `Email`) VALUES ('$contador','$_POST[pregunta]', '$_POST[respuesta]', '$_POST[complejidad]', '$mail')";
+        $sql = "INSERT INTO `Preguntas` (`id`,`Pregunta`, `Respuesta`, `Complejidad`, `Email`) VALUES ('$contador','$_POST[pregunta]', '$_POST[respuesta]', '$_POST[complejidad]', '$mail')";
 
 
         if (!$db->query($sql)) {
@@ -206,6 +246,80 @@ function verPreguntasXML()
 
     }
     echo '</table>';
+}
+
+function  actualizarPregunta($pregunta,$respuesta,$complejidad,$id){
+
+$db = getBD();
+    echo "<script type='text/javascript'>alert('ACTUALIZAR PREGUNTA');</script>";
+
+    $sql="UPDATE Preguntas SET Pregunta='$pregunta',Respuesta='$respuesta',Complejidad='$complejidad' WHERE id='$id'";
+    $sql="UPDATE Preguntas SET Pregunta='$pregunta',Respuesta='$respuesta',Complejidad='$complejidad' WHERE id='$id'";
+
+		if(!$db->query($sql)){
+
+            die('Error: '.$db->error);
+
+        }else{
+            echo("Resultado correcto");
+        }
+
+		$db->close();
+	}
+function getEditarPreguntas(){
+
+    $db = getBD();
+    $sql = "SELECT * FROM Preguntas";
+    $sth = $db->query($sql);
+
+    echo '<select id="selec" onchange="pedir()">';
 
 
+    while( $result=mysqli_fetch_array($sth)) {
+        echo '<option value="' . $result['id'] . '">' . $result['id'] . '</option>';
+
+    } echo '</select>';
+
+    $sth -> close();
+    $db -> close();
+
+}
+function getPregunta($id){
+    $db = getBD();
+    $sql = 'SELECT * FROM Preguntas WHERE id="'.$id.'"';
+    $sth = $db->query($sql);
+    echo '<form id="formulario">';
+    while( $result=mysqli_fetch_array($sth)) {
+        echo'
+    <li>
+        <label>Pregunta:</label>
+        <input type="text" id="pregunta" value="' . $result['Pregunta'] . '"/>
+        </li>
+        <li>
+        <label">Respuesta:</label></br>
+        <input type="text" id="respuesta" value="' . $result['Respuesta'] . '">
+        </li>
+        <li>
+        <label">Complejidad:</label></br>
+        <input type="number" id="complejidad" value="' . $result['Complejidad'] . '">
+        </li>
+        <li>
+        <label">Email:</label></br>
+        <input type="text" id="usuario" disabled="true" value="' . $result['Email'] . '">
+        
+    </li>
+';
+       // echo'<input type="text" id="pregunta" value="' . $result['Pregunta'] . '"></input>';
+       // echo('</br>');
+       // echo'<input type="text" id="respuesta" value="' . $result['Respuesta'] . '"></input>';
+       // echo('</br>');
+       // echo'<input type="number" id="complejidad" value="' . $result['Complejidad'] . '"></input>';
+       // echo('</br>');
+       //echo'<input type="text" id="usuario" disabled="true" value="' . $result['Email'] . '"></input>';
+    }
+    echo '</form>';
+    echo '<button onclick="editar()">Editar</button>';
+    $sth -> close();
+    $db -> close();
+    accion("ver preguntas");
 }

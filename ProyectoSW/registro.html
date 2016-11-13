@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <title>Registro</title>
     <link rel="stylesheet"
-          href="diseno.css" />
+          href="diseno.css"/>
     <link rel='stylesheet'
           type='text/css'
           media='only screen and (min-width: 530px) and (min-device-width: 481px)'
-          href='estilos/wide.css' />
+          href='estilos/wide.css'/>
     <link rel='stylesheet'
           type='text/css'
           media='only screen and (max-width: 480px)'
-          href='estilos/smartphone.css' />
+          href='estilos/smartphone.css'/>
     <script type="text/javascript" src="funciones.js"></script>
 
     <style>
@@ -25,13 +25,13 @@
     <script src="scripts/jquery-2.1.4.js"></script>
 
     <script>
-        var cmail=false;
-        var cpass=false;
+        var cmail = false;
+        var cpass = false;
 
-        $(document).ready(function(){
-            $("textarea").dblclick(function(){
+        $(document).ready(function () {
+            $("textarea").dblclick(function () {
                 $(this).hide();
-                $('#intereslabel').innerHTML=['<span> tap 2 times for undo</span>'].join('');
+                $('#intereslabel').innerHTML = ['<span> tap 2 times for undo</span>'].join('');
             });
 
             $(document.getElementById('intereslabel')).dblclick(function () {
@@ -71,47 +71,57 @@
             document.getElementById('files').addEventListener('change', archivo, false);
         }
         function comprobarMail() {
-            var m=$('#email').val();
+            var m = $('#email').val();
+            $("#imm").remove();
             $('#mail').append('<img id="imm" height="20px" width="20px" src="imagen/loading.gif"/>');
-            $.post('ComprobarEmail.php', {email:m}, function (respuesta) {
+            $.post('ComprobarEmail.php', {email: m}, function (respuesta) {
                 console.log("La respuesta es:", respuesta);
-                if (respuesta=='SI'){
+                if (respuesta == 'SI') {
                     $('#imm').remove();
                     $('#mail').append("<img id='imm' with='20px' height='20px' src='imagen/Green_check.png'> </img>");
-                    cmail=true;
+                    cmail = true;
                 }
-                else{
+                else {
                     $('#imm').remove();
                     $('#mail').append("<img id='imm' with='20px' height='20px'src='imagen/Red_check.png'> </img>");
-                    cmail=false;
+                    cmail = false;
                 }
 
             });
 
         }
-        function comprobarPass(){
+        function comprobarPass() {
             var p = $("#password").val();
+            $("#imp").remove();
             $("#pass").append("<img id='imp' width='20px' height='20px' src='imagen/loading.gif'> </img>");
-            $.post("ProbarContrasena2.php", {password: p}, function(respuesta
-            ) {
+            $.post("ProbarContrasena2.php", {password: p}, function (respuesta) {
                 console.log("La respuesta es:", respuesta)
-                if(respuesta=="VALIDA"){
+                if (respuesta == "VALIDA") {
                     $("#imp").remove();
                     $("#pass").append("<img id='imp' width='20px' height='20px' src='imagen/Green_check.png'> </img>");
-                    cpass=true;
-                }else{
+                    cpass = true;
+                } else {
                     $("#imp").remove();
                     $("#pass").append("<img id='imp' width='20px' height='20px' src='imagen/Red_check.png'> </img>");
-                    cpass=false;
+                    cpass = false;
 
                 }
             });
+        }
+        function comprobar() {
+            var p1 = $("#password").val();
+            var p2 = $("#password2").val();
+
+            if(p1!=p2)
+                $("#password2").css('border','5px solid red');
+
         }
 
     </script>
 </head>
 <body>
-<form id='registro' name='registro' onSubmit="return vervalores()" method="post" action="RegistrarconFoto.php" enctype='multipart/form-data'>
+<form id='registro' name='registro' onSubmit="return vervalores()" method="post" action="RegistrarconFoto.php"
+      enctype='multipart/form-data'>
     <!--<form action='' method='post' enctype='multipart/form-data'>-->
 
     <h1>REGISTRO</h1>
@@ -124,19 +134,27 @@
 
             <li>
                 <label for="name">Nombre y apellidos<span>(*)</span>:</label>
-                <input type="text" name="name" id="name" placeholder="Asier Eguibar Redondo" class="form-input" />
+                <input type="text" name="name" id="name" placeholder="Asier Eguibar Redondo" class="form-input"/>
                 <!--<input type="text" name="name" id="name" placeholder="Asier Eguibar" required/> -->
 
             </li>
             <li>
                 <label for="email" id="mail">Direccion de correo<span>(*)</span>:</label>
-                <input type="text" name="email" id="email" placeholder="aeguibar006@ikasle.ehu.eus" class="form-input" onchange="comprobarMail()">
+                <input type="text" name="email" id="email" placeholder="aeguibar006@ikasle.ehu.eus" class="form-input"
+                       onchange="comprobarMail()">
                 <!--<input type="email" name="email" id="email"placeholder="aeguibar006@ikasle.ehu.eus" required/>   -->
 
             </li>
             <li>
                 <label for="password" id="pass">Password<span>(*)</span>:</label>
-                <input type="password" name="password" id="password" placeholder="6 digitos" class="form-input" onchange="comprobarPass()">
+                <input type="password" name="password" id="password"
+                       placeholder="EgiBar56" class="form-input"
+                       onchange="comprobarPass()">
+            </li>
+            <li>
+                <label for="password2" id="pass2">Repita la password<span>(*)</span>:</label>
+                <input type="password" name="password2" id="password2" placeholder="Repita la contraseña"
+                       class="form-input" onchange="comprobar()">
                 <!-- <input type="password" name="password" id="password" required/> -->
             </li>
             <li>
@@ -144,31 +162,25 @@
                 <input type="text" name="telefono" id="telefono" maxlength="9" minlength="9" class="form-input"/>
                 <!--<input type="text" name="telefono" id="telefono" maxlength="9" minlength="9" required/>-->
             </li>
-            <li>
-                <label for="especialidad">Especialidad<span>(*)</span>:</label></br>
-                <!--<input list="especialidad" name="especialidad" placeholder="doble click para las opciones" class="form-input" onblur="revisaresp(this)"/>
-                <!--<input list="especialidad" name="especialidad" required/>-->
-                <!--<select id="especialidad">
-            <datalist id="especialidad">
-                <option label="Ingenieria del software" value="Ingenieria del software">
-                <option label="Computacion" value="Computacion">
-                <option label="Harware" value="Hardware">
-                <!--</select>-->
-                <select name="especialidad" id="especialidad" onchange='revisaresp(this)'>
-                    <option>IngenierÃ­a del Software</option>
-                    <option>IngenierÃ­a de Computadores</option>
-                    <option>ComputaciÃ³n</option>
-                    <option>Otra</option>
-                </select>
-                <!--  </datalist> -->
-            </li>
+
         </ul>
     </div>
     <div class="column">
         <ul>
             <li>
+                <label for="especialidad">Especialidad<span>(*)</span>:</label></br>
+
+                <select name="especialidad" id="especialidad" onchange='revisaresp(this)'>
+                    <option>Ingeniería del Software</option>
+                    <option>Ingeniería de Computadores</option>
+                    <option>Computación</option>
+                    <option>Otra</option>
+                </select>
+            </li>
+            <li>
                 <label for="interes" id="intereslabel">Tecnologias o herramientas intresado:</label></br>
-                <textarea name="interes" class="form-input" id="interes" placeholder= " Escriba si desea obtener informacion sobre algun campo                                   Tap two times for disappearing "></textarea>
+                <textarea name="interes" class="form-input" id="interes"
+                          placeholder=" Escriba si desea obtener informacion sobre algun campo                                   Tap two times for disappearing "></textarea>
             </li>
             <li>
                 <label for="files" id="imagenlabel">Foto de perfil:</label></br>
@@ -178,8 +190,10 @@
             </li>
 
 
-            <a href="layout.php"><button type="button" name="volver" class="form-btn" id="volver" rigth="20%" >Volver</button></a>
-            <button  type="submit" name="boton" id="enviar"  class="form-btn">Enviar</button>
+            <a href="layout.php">
+                <button type="button" name="volver" class="form-btn" id="volver" rigth="20%">Volver</button>
+            </a>
+            <button type="submit" name="boton" id="enviar" class="form-btn">Enviar</button>
 
 
         </ul>

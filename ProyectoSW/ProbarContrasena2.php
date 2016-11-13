@@ -1,8 +1,8 @@
 <?php
 	require_once('lib/nusoap.php');
 	require_once('lib/class.wsdlcache.php');
-	$soapclient = new nusoap_client('http://localhost/SW/ProyectoSW/ComprobarContrasena2.php?wsdl',true);
-	//$soapclient = new nusoap_client('http://egibarsw.esy.es/SW/ProyectoSW/ComprobarContrasena2.php?wsdl',true);
+	//$soapclient = new nusoap_client('http://localhost/SW/ProyectoSW/ComprobarContrasena2.php?wsdl',true);
+	$soapclient = new nusoap_client('http://egibarsw.esy.es/ProyectoSW/ComprobarContrasena2.php?wsdl',true);
 
 	if(isset($_POST['password'])){
 
