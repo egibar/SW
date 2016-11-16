@@ -11,7 +11,7 @@
 
     <h1>LOGIN</h1>
 
-    <div class="column">
+    <div  align="center">
 
         <ul>
             <li>
@@ -24,16 +24,14 @@
                 <label for="password">Password:</label>
                 <input type="password" name="password" id="password" required class="form-input"/>
             </li>
-            <div align="right">
                 <a href="layout.php">
-                <button type="button" name="volver" id="volver" class="form-btn" rigth="20%">Volver</button>
+                <button type="button" name="volver" id="volver" class="form-btn" >Volver</button>
             </a>
             <button type="submit" name="boton" id="enviar" class="form-btn">Enviar</button>
             </br>
             <a href="recuperarpass.php">
                 ¿Olvido su contraseña?
             </a>
-                </div>
         </ul>
     </div>
 </form>

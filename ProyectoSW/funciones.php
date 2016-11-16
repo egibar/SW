@@ -111,25 +111,28 @@ function login()
     while ($result = mysqli_fetch_array($sth)) {
         $rol= $result['rol'];
         $password = $result['password'];
-        if($result['Bloqueado']==1){
+        if($result['bloqueado']==1){
             echo ('<p color="red">El usuario esta bloquado</p>');
             return false;
         }
     }
     if ($cont == 1) {
-        if (strcmp($password, $pass) == 0) {
+        if (strcmp($password,$pass) == 0) {
             $_SESSION['usuario'] = $email;
             $_SESSION['rol'] = $rol;
             conexion();
+            if(isset($_SESSION[$email])){
+                $_SESSION[$email] = 0;
+            }
             return true;
         } else {
             if (empty($_SESSION[$email])){
                 $_SESSION[$email]=1;
-                echo ('<p color="red">Password incorrecta</p>');
+                echo ('<p><FONT  color="red">Password incorrecta</FONT></p>');
             }
             else{
                 $_SESSION[$email]++;
-                echo ('<p color="red">Password incorrecta</p>');
+                echo ('<p><FONT  color="red">Password incorrecta</FONT></p>');
                 if ($_SESSION[$email]==3){
                     $_SESSION[$email]==0;
                     bloquearUsuario($email);
@@ -146,7 +149,7 @@ function login()
 
 function bloquearUsuario($email){
     $db= getBD();
-    $sql = "UPDATE usuario SET Bloquedo=true WHERE Email=$email";
+    $sql = "UPDATE usuario SET bloqueado=1 WHERE email='$email'";
     if(!$db->query($sql))
         die('Error: '.$db->error);
     else{
@@ -251,9 +254,7 @@ function verPreguntasXML()
 function  actualizarPregunta($pregunta,$respuesta,$complejidad,$id){
 
 $db = getBD();
-    echo "<script type='text/javascript'>alert('ACTUALIZAR PREGUNTA');</script>";
 
-    $sql="UPDATE Preguntas SET Pregunta='$pregunta',Respuesta='$respuesta',Complejidad='$complejidad' WHERE id='$id'";
     $sql="UPDATE Preguntas SET Pregunta='$pregunta',Respuesta='$respuesta',Complejidad='$complejidad' WHERE id='$id'";
 
 		if(!$db->query($sql)){
@@ -322,4 +323,30 @@ function getPregunta($id){
     $sth -> close();
     $db -> close();
     accion("ver preguntas");
+}
+function actualizarUsuario($email,$pass,$telefono){
+
+    $db = getBD();
+
+    $password = sha1($pass);
+
+
+
+    $sql="UPDATE usuario SET Password='$password' WHERE Email='$email' AND Telefono='$telefono'";
+
+    if(!$db->query($sql)){
+
+        echo("Resultado incorrecto");
+        die('Error: '.$db->error);
+
+    }else{
+        $r = $db->affected_rows;
+        if($r==0){
+            echo("<p><FONT COLOR=RED>Alguno de los datos no es correcto</FONT></p>");
+        }else if($r==1){
+            echo("<p><FONT COLOR=RED>Se ha actualizado la contraseña correctamente</FONT></p>");
+        }
+    }
+
+    $db->close();
 }
