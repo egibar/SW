@@ -87,8 +87,8 @@ if (isset($_POST['pregunta']) && isset($_POST['respuesta'])) {
     </form>
     <button onclick="pedirDatos()">Cargar Preguntas</button>
     <button onclick="enviarDatos()">Insertar Preguntas</button>
-</div>
 <div id="resultado" align="center"></div>
 <div id="preguntas" align="center"></div>
+</div>
 </body>
 </html>

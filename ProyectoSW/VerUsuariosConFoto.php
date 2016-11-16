@@ -39,7 +39,9 @@ while ($result = mysqli_fetch_array($usuarios)) {
         echo '<td><p align="center"><img heigth="50%" width="50%" src="data:jpeg;base64,' . base64_encode($result['image']) . '"/></p></td></tr>';
     }
 }
-echo '</table>';
+echo '</table> </br>
+                <a href="layout.php"><button type="button" name="volver" id="volver" class="form-btn" rigth="20%">Volver</button></a>
+';
 $usuarios->close();
 mysqli_close($db);
 accion("ver preguntas");

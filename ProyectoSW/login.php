@@ -45,7 +45,7 @@ include "funciones.php";
 if (isset($_POST['email'])) {
     if (login()) {
         if (strcmp($_SESSION['rol'], 'alumno') == 0)
-            header('location:GestionPreguntas.php');
+        header('location:GestionPreguntasJQuery.php');
         elseif (strcmp($_SESSION['rol'], 'profesor') == 0)
             header('location:revisar.php');
     }

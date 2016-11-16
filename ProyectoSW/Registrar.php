@@ -45,7 +45,10 @@ else {
 
             echo "1 record added";
 
-            echo "</br><p><a href='VerUsuarios.php'>Ver Usuarios</a></p>";
+            echo '</br><p><a href="VerUsuariosConFoto.php">Ver Usuarios</a></p>
+                                <a href="layout.php"><button type="button" name="volver" id="volver" class="form-btn" rigth="20%">Volver</button></a>
+
+';
 
         }
 

@@ -1,6 +1,5 @@
 
  function vervalores(){
-     var frm = document.getElementById("registro");
      var nombre = document.getElementById('name');
      var email = document.getElementById("email");
      var password = document.getElementById("password");
@@ -27,7 +26,7 @@
      //    alert("la contraseña no tiene al menos 6 caracteres");
          return false;
      }
-     else if(password!=password2) {
+     else if(password.value!=password2.value) {
          return false;
      }
     else if( !exptel.test(telefono.value) && telefono.value.length==9 ) {

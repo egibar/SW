@@ -72,6 +72,7 @@ getEditarPreguntas();
     </li>
         <div id="preguntas"></div>
         <div id="respuestas"></div>
+    <a href="layout.php"><button type="button" name="volver" id="volver" class="form-btn" rigth="20%">Volver</button></a>
 
 </ul>
     </div>

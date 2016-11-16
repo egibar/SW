@@ -48,7 +48,9 @@ if ($result = mysqli_query($db,$buscarUsuario))
 $encPass=sha1($pass);
 
 if ($count == 1)
-    echo '<script language="javascript">alert("Correo ya existente");</script>';
+    echo '<script language="javascript">alert("Correo ya existente");</script>
+</br>
+                <a href="layout.php"><button type="button" name="volver" id="volver" class="form-btn" rigth="20%">Volver</button></a>';
 
 else {
 
@@ -93,6 +95,9 @@ else {
         echo "1 record added";
 
         echo "</br><p><a href='VerUsuarios.php'>Ver Usuarios</a></p>";
+
+        echo'</br>
+                <a href="layout.php"><button type="button" name="volver" id="volver" class="form-btn" rigth="20%">Volver</button></a>';
 
     }
 
